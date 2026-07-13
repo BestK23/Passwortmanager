@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { GeneratorOptions } from '../types';
 import { generatePassword, passwordStrength } from '../lib/generatePassword';
+import { CheckIcon, CopyIcon, RefreshIcon } from './Icons';
+import { Switch } from './Switch';
 
 interface GeneratorProps {
   onSave: (label: string, username: string, password: string) => void;
@@ -48,7 +50,7 @@ export function Generator({ onSave }: GeneratorProps) {
       <div className="generator__output">
         <span className="generator__password">{password || 'Zeichensatz wählen'}</span>
         <button className="generator__copy" onClick={copy} disabled={!password} aria-label="Kopieren">
-          {copied ? '✅' : '📋'}
+          {copied ? <CheckIcon width={18} height={18} /> : <CopyIcon width={18} height={18} />}
         </button>
       </div>
 
@@ -77,36 +79,23 @@ export function Generator({ onSave }: GeneratorProps) {
       />
 
       <div className="generator__toggles">
-        <label className="toggle">
-          <input type="checkbox" checked={options.uppercase} onChange={() => toggle('uppercase')} />
-          Großbuchstaben (A-Z)
-        </label>
-        <label className="toggle">
-          <input type="checkbox" checked={options.lowercase} onChange={() => toggle('lowercase')} />
-          Kleinbuchstaben (a-z)
-        </label>
-        <label className="toggle">
-          <input type="checkbox" checked={options.numbers} onChange={() => toggle('numbers')} />
-          Zahlen (0-9)
-        </label>
-        <label className="toggle">
-          <input type="checkbox" checked={options.symbols} onChange={() => toggle('symbols')} />
-          Symbole (!@#$...)
-        </label>
-        <label className="toggle">
-          <input
-            type="checkbox"
-            checked={options.excludeAmbiguous}
-            onChange={() => toggle('excludeAmbiguous')}
-          />
-          Verwechselbare Zeichen ausschließen (I, l, 1, O, 0)
-        </label>
+        <Switch label="Großbuchstaben (A-Z)" checked={options.uppercase} onChange={() => toggle('uppercase')} />
+        <Switch label="Kleinbuchstaben (a-z)" checked={options.lowercase} onChange={() => toggle('lowercase')} />
+        <Switch label="Zahlen (0-9)" checked={options.numbers} onChange={() => toggle('numbers')} />
+        <Switch label="Symbole (!@#$...)" checked={options.symbols} onChange={() => toggle('symbols')} />
+        <Switch
+          label="Verwechselbare Zeichen ausschließen"
+          checked={options.excludeAmbiguous}
+          onChange={() => toggle('excludeAmbiguous')}
+        />
       </div>
 
       {noCharsetSelected && <p className="generator__warning">Wähle mindestens einen Zeichensatz.</p>}
 
       <button className="btn btn--secondary" onClick={regenerate} disabled={noCharsetSelected}>
-        🔄 Neu generieren
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+          <RefreshIcon width={17} height={17} /> Neu generieren
+        </span>
       </button>
 
       {!showSaveForm ? (

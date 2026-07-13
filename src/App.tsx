@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { LockScreen } from './components/LockScreen';
 import { Generator } from './components/Generator';
 import { Vault } from './components/Vault';
+import { LockIcon } from './components/Icons';
 import { useVault } from './hooks/useVault';
 import './App.css';
 
@@ -19,9 +20,9 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <div className="app-header__title">🔐 Passwort-Tresor</div>
+        <div className="app-header__title">Passwort-Tresor</div>
         <button className="app-header__lock" onClick={() => setUnlocked(false)} aria-label="Sperren">
-          🔒
+          <LockIcon width={17} height={17} />
         </button>
       </header>
 

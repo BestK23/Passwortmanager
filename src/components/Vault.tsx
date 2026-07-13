@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { VaultEntry } from '../types';
+import { CheckIcon, CopyIcon, EyeIcon, EyeOffIcon, TrashIcon } from './Icons';
 
 interface VaultProps {
   entries: VaultEntry[];
@@ -27,18 +28,19 @@ function VaultRow({ entry, onDelete }: { entry: VaultEntry; onDelete: (id: strin
       </div>
       <div className="vault-row__actions">
         <button onClick={() => setRevealed((r) => !r)} aria-label="Anzeigen">
-          {revealed ? '🙈' : '👁️'}
+          {revealed ? <EyeOffIcon width={19} height={19} /> : <EyeIcon width={19} height={19} />}
         </button>
         <button onClick={copy} aria-label="Kopieren">
-          {copied ? '✅' : '📋'}
+          {copied ? <CheckIcon width={19} height={19} /> : <CopyIcon width={19} height={19} />}
         </button>
         <button
+          className="danger"
           onClick={() => {
             if (confirm(`"${entry.label}" wirklich löschen?`)) onDelete(entry.id);
           }}
           aria-label="Löschen"
         >
-          🗑️
+          <TrashIcon width={19} height={19} />
         </button>
       </div>
     </div>

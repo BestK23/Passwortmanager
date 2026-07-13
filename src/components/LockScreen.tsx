@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useFaceIdLock } from '../hooks/useFaceIdLock';
 import { usePasscodeLock } from '../hooks/usePasscodeLock';
+import { FaceIdIcon, LockIcon } from './Icons';
 
 interface LockScreenProps {
   onUnlock: () => void;
@@ -27,7 +28,9 @@ export function LockScreen({ onUnlock }: LockScreenProps) {
     if (faceId.status === 'needs-setup') {
       return (
         <div className="lock-screen">
-          <div className="lock-screen__icon">🔒</div>
+          <div className="lock-screen__icon">
+            <FaceIdIcon />
+          </div>
           <h1>Passwort-Tresor</h1>
           <p>Sichere deinen Tresor mit Face ID.</p>
           <button className="btn btn--primary" onClick={faceId.setup}>
@@ -40,7 +43,9 @@ export function LockScreen({ onUnlock }: LockScreenProps) {
 
     return (
       <div className="lock-screen">
-        <div className="lock-screen__icon">🔒</div>
+        <div className="lock-screen__icon">
+          <FaceIdIcon />
+        </div>
         <h1>Passwort-Tresor</h1>
         <p>Entsperre mit Face ID, um fortzufahren.</p>
         <button className="btn btn--primary" onClick={faceId.unlock}>
@@ -54,7 +59,9 @@ export function LockScreen({ onUnlock }: LockScreenProps) {
   if (passcode.status === 'needs-setup') {
     return (
       <div className="lock-screen">
-        <div className="lock-screen__icon">🔒</div>
+        <div className="lock-screen__icon">
+          <LockIcon />
+        </div>
         <h1>Passwort-Tresor</h1>
         <p>Face ID ist auf diesem Gerät/Browser nicht verfügbar. Lege stattdessen einen Code fest.</p>
         <input
@@ -86,7 +93,9 @@ export function LockScreen({ onUnlock }: LockScreenProps) {
 
   return (
     <div className="lock-screen">
-      <div className="lock-screen__icon">🔒</div>
+      <div className="lock-screen__icon">
+        <LockIcon />
+      </div>
       <h1>Passwort-Tresor</h1>
       <p>Code eingeben, um fortzufahren.</p>
       <input
