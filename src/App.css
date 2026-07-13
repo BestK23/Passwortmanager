@@ -1,0 +1,383 @@
+:root {
+  --bg: #0f1220;
+  --bg-elevated: #1a1f36;
+  --card: #232a45;
+  --accent: #3b82f6;
+  --accent-dark: #2563eb;
+  --text: #f4f6ff;
+  --text-muted: #9aa3c7;
+  --danger: #ff4b4b;
+  --good: #22c55e;
+  --warn: #f59e0b;
+  --border: rgba(154, 163, 199, 0.25);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f7f8fc;
+    --bg-elevated: #ffffff;
+    --card: #ffffff;
+    --text: #202233;
+    --text-muted: #6b7089;
+    --border: rgba(32, 34, 51, 0.12);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.1rem;
+  padding-top: calc(0.9rem + env(safe-area-inset-top));
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+.app-header__title {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.app-header__lock {
+  background: var(--card);
+  border: none;
+  border-radius: 999px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1.1rem;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+.tabs__tab {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.tabs__tab--active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.app__main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem 1.1rem 3rem;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Lock screen */
+.lock-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.lock-screen__icon {
+  font-size: 4rem;
+}
+
+.lock-screen h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.lock-screen p {
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  max-width: 320px;
+}
+
+.lock-screen__input {
+  width: 100%;
+  max-width: 280px;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.lock-screen__error {
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  max-width: 280px;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 0 var(--accent-dark);
+}
+
+.btn--primary:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.btn--primary:disabled {
+  background: var(--border);
+  color: var(--text-muted);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn--secondary {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+}
+
+.btn--secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Generator */
+.generator {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.generator__output {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: var(--card);
+  border-radius: 0.85rem;
+  padding: 1.1rem;
+  border: 1px solid var(--border);
+}
+
+.generator__password {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 1.15rem;
+  word-break: break-all;
+  letter-spacing: 0.02em;
+}
+
+.generator__copy {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+}
+
+.strength {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.strength__bar {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.strength__segment {
+  height: 6px;
+  flex: 1;
+  border-radius: 3px;
+  background: var(--border);
+}
+
+.strength__segment--filled {
+  background: var(--accent);
+}
+
+.strength--1 .strength__segment--filled {
+  background: var(--danger);
+}
+.strength--2 .strength__segment--filled {
+  background: var(--warn);
+}
+.strength--3 .strength__segment--filled,
+.strength--4 .strength__segment--filled {
+  background: var(--good);
+}
+
+.generator__row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.generator__toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: var(--card);
+  border-radius: 0.85rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  margin: 0.5rem 0;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+}
+
+.toggle input {
+  width: 20px;
+  height: 20px;
+}
+
+.generator__warning {
+  color: var(--warn);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.generator__save-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: var(--card);
+  border-radius: 0.85rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+}
+
+.generator__save-form .lock-screen__input {
+  max-width: none;
+  text-align: left;
+}
+
+.generator__save-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.generator__save-actions .btn {
+  max-width: none;
+  margin-bottom: 0;
+}
+
+/* Vault */
+.vault {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.vault__empty {
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.vault-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--card);
+  border-radius: 0.85rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+}
+
+.vault-row__info {
+  min-width: 0;
+}
+
+.vault-row__label {
+  font-weight: 700;
+}
+
+.vault-row__username {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.vault-row__password {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  margin-top: 0.2rem;
+  word-break: break-all;
+}
+
+.vault-row__actions {
+  display: flex;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.vault-row__actions button {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.3rem;
+}
